@@ -14,4 +14,6 @@ public class MessageModel {
     private String subject;
     private String text;
 
+
+
 }

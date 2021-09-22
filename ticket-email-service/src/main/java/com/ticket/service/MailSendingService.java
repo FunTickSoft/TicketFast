@@ -7,4 +7,5 @@ public interface MailSendingService {
 
     void send(MessageModel messageModel);
     void sendTest();
+
 }
