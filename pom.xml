@@ -37,6 +37,7 @@
 
     <modules>
         <module>ticket-email-service</module>
+        <module>ticket-database-core</module>
     </modules>
 
 </project>
