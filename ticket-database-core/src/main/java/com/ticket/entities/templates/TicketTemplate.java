@@ -2,9 +2,11 @@ package com.ticket.entities.templates;
 
 
 import com.ticket.entities.special.Organization;
+import com.ticket.entities.templates.reference.TicketAoPlaceRefTemplate;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Builder(toBuilder = true)
 @Getter
@@ -32,5 +34,7 @@ public class TicketTemplate {
     @Column(name="isActive")
     private Boolean isActive;
 
+    @OneToMany(mappedBy = "ticketTemplate")
+    private Set<TicketAoPlaceRefTemplate> ticketArenaReference;
 
 }

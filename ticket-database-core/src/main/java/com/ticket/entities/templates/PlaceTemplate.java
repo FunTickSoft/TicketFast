@@ -3,6 +3,7 @@ package com.ticket.entities.templates;
 
 import com.ticket.entities.special.Organization;
 import com.ticket.entities.special.RentInfo;
+import com.ticket.entities.templates.reference.DiaryPlaceRefTemplate;
 import lombok.*;
 
 import javax.persistence.*;
@@ -57,12 +58,12 @@ public class PlaceTemplate {
     private Organization organization;
 
     @OneToMany(mappedBy = "place_template", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<AreaOfPlaceTemplates> areas;
+    private List<AreaTemplates> areas;
 
     @Column(name = "isActive", nullable = false)
     private Boolean isActive = true;
 
-    @ManyToMany(mappedBy = "placeTemplates")
-    private Set<DiaryTemplate> diaryTemplates;
+    @OneToMany(mappedBy = "placeTemplate")
+    private Set<DiaryPlaceRefTemplate> refDiaryTemp;
 
 }

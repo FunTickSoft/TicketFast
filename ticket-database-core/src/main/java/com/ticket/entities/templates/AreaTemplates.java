@@ -1,8 +1,10 @@
 package com.ticket.entities.templates;
 
+import com.ticket.entities.templates.reference.TicketAoPlaceRefTemplate;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Builder(toBuilder = true)
 @Getter
@@ -10,8 +12,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "area_of_place_templates")
-public class AreaOfPlaceTemplates {
+@Table(name = "area_templates")
+public class AreaTemplates {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,5 +34,8 @@ public class AreaOfPlaceTemplates {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "place_template", referencedColumnName = "id")
     private PlaceTemplate place_template;
+
+    @OneToMany(mappedBy = "areaTemplate")
+    private Set<TicketAoPlaceRefTemplate> arenaTicketReference;
 
 }

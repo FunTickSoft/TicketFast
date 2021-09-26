@@ -1,11 +1,11 @@
 package com.ticket.entities.templates;
 
 
+import com.ticket.entities.templates.reference.DiaryPlaceRefTemplate;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Builder(toBuilder = true)
@@ -42,13 +42,9 @@ public class DiaryTemplate {
     @Temporal(TemporalType.TIME)
     private Date endTime;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "diary_place_template",
-            joinColumns = @JoinColumn(name = "diary_template_id"),
-            inverseJoinColumns = @JoinColumn(name = "place_template_id")
-    )
-    private Set<PlaceTemplate> placeTemplates;
+    @OneToMany(mappedBy = "diaryTemplate")
+    private Set<DiaryPlaceRefTemplate> refDiaryTemp;
+
 
 
 }
