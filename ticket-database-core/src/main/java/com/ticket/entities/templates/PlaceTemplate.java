@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Builder(toBuilder = true)
 @Getter
@@ -60,5 +61,8 @@ public class PlaceTemplate {
 
     @Column(name = "isActive", nullable = false)
     private Boolean isActive = true;
+
+    @ManyToMany(mappedBy = "placeTemplates")
+    private Set<DiaryTemplate> diaryTemplates;
 
 }

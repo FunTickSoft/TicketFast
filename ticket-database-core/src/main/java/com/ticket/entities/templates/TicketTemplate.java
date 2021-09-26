@@ -33,6 +33,4 @@ public class TicketTemplate {
     private Boolean isActive;
 
 
-
-
 }
