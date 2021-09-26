@@ -1,0 +1,62 @@
+package com.ticket.entities.special;
+
+
+import com.ticket.entities.account.UserInfo;
+import com.ticket.entities.templates.PlaceTemplate;
+import com.ticket.entities.templates.TicketTemplate;
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Builder(toBuilder = true)
+@Getter
+@Setter(value = AccessLevel.PUBLIC)
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "organization")
+public class Organization {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "fullname", nullable = false)
+    private String fullName;
+
+    @Column(name = "inn")
+    private Integer iNN;
+
+    private Boolean isIndividual;
+
+    //ogrn; ip - 10 , not ip - 13
+    @Column(name = "ogrn", length = 13)
+    private Integer oGRN;
+
+    @Column(name = "kpp", length = 9)
+    private Integer KPP;
+
+    //okpo; ip - 10 ; not ip - 8
+    @Column(name = "okpo", length = 10)
+    private Integer oKPO;
+
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private List<AddressBook> addresses;
+
+    @Column(name = "isActive")
+    private Boolean isActive;
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private List<PlaceTemplate> places;
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private List<TicketTemplate> ticketTemplates;
+
+
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name = "userinfo_id")
+    private UserInfo userinfo_id;
+
+}
