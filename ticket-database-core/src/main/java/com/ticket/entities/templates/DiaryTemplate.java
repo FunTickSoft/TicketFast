@@ -5,7 +5,6 @@ import com.ticket.entities.templates.reference.DiaryPlaceRefTemplate;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 @Builder(toBuilder = true)
