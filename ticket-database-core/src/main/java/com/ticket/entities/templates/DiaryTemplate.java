@@ -30,18 +30,6 @@ public class DiaryTemplate {
     @Column(name = "description", nullable = false, length = 2048)
     private String description;
 
-    @Temporal(TemporalType.DATE)
-    private Date starDate;
-
-    @Temporal(TemporalType.TIME)
-    private Date startTime;
-
-    @Temporal(TemporalType.DATE)
-    private Date endDate;
-
-    @Temporal(TemporalType.TIME)
-    private Date endTime;
-
     @OneToMany(mappedBy = "diaryTemplate")
     private Set<DiaryPlaceRefTemplate> refDiaryTemp;
 

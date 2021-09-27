@@ -1,8 +1,10 @@
 package com.ticket.entities.account;
 
+import com.ticket.entities.processing.Order;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Builder(toBuilder = true)
 @Getter
@@ -31,8 +33,13 @@ public class Account {
     @Column(name = "isActive")
     private Boolean isActive;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "account")
+    @PrimaryKeyJoinColumn
     private UserInfo userInfo;
+
+    @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    private UserPurchasingInfo userPurchasingInfo;
 
 
 }

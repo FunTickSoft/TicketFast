@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user_infos")
+@Table(name = "user_info")
 public class UserInfo {
 
     @Id
@@ -40,7 +40,7 @@ public class UserInfo {
 
     @OneToOne
     @JoinColumn(name = "account", referencedColumnName = "id")
-    private Account active;
+    private Account account;
 
     @OneToOne(mappedBy = "userinfo_id", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
