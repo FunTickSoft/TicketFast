@@ -1,7 +1,7 @@
 package com.ticket.entities.templates;
 
 
-import com.ticket.entities.special.Organization;
+import com.ticket.entities.organization.Organization;
 import com.ticket.entities.special.RentInfo;
 import com.ticket.entities.templates.reference.DiaryPlaceRefTemplate;
 import lombok.*;

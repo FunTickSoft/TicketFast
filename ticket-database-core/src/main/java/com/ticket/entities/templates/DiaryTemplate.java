@@ -1,11 +1,11 @@
 package com.ticket.entities.templates;
 
 
+import com.ticket.entities.diarypack.reference.DiaryReg;
 import com.ticket.entities.templates.reference.DiaryPlaceRefTemplate;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 @Builder(toBuilder = true)
@@ -30,21 +30,11 @@ public class DiaryTemplate {
     @Column(name = "description", nullable = false, length = 2048)
     private String description;
 
-    @Temporal(TemporalType.DATE)
-    private Date starDate;
-
-    @Temporal(TemporalType.TIME)
-    private Date startTime;
-
-    @Temporal(TemporalType.DATE)
-    private Date endDate;
-
-    @Temporal(TemporalType.TIME)
-    private Date endTime;
-
     @OneToMany(mappedBy = "diaryTemplate")
     private Set<DiaryPlaceRefTemplate> refDiaryTemp;
 
+    @OneToMany(mappedBy = "diaryTemplate")
+    private Set<DiaryReg> diaryReg;
 
 
 }

@@ -1,9 +1,11 @@
-package com.ticket.entities.special;
+package com.ticket.entities.organization;
 
 
 import com.ticket.entities.account.UserInfo;
+import com.ticket.entities.special.AddressBook;
 import com.ticket.entities.templates.PlaceTemplate;
 import com.ticket.entities.templates.TicketTemplate;
+import jdk.jfr.BooleanFlag;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,7 +30,9 @@ public class Organization {
     @Column(name = "inn")
     private Integer iNN;
 
-    private Boolean isIndividual;
+    @Builder.Default
+    @Column(name = "isIndividual", nullable = false)
+    private Boolean isIndividual = false;
 
     //ogrn; ip - 10 , not ip - 13
     @Column(name = "ogrn", length = 13)
@@ -54,9 +58,14 @@ public class Organization {
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
     private List<TicketTemplate> ticketTemplates;
 
-
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "userinfo_id")
     private UserInfo userinfo_id;
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private List<RoleStaff> roleStaffs;
+
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.ticket.entities.special;
 
+import com.ticket.entities.organization.Organization;
 import com.ticket.enums.AddressType;
 import lombok.*;
 
