@@ -1,4 +1,4 @@
-package com.ticket.entities.diarypack;
+package com.ticket.entities.diarypack.reference;
 
 
 import lombok.*;
@@ -11,14 +11,18 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ticket")
-public class Ticket {
+@Table(name = "diary_reg")
+public class DiaryReg {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
+
+    @Builder.Default
+    @Column(name ="isActive", nullable = false)
+    private Boolean isActive = true;
 
 
 

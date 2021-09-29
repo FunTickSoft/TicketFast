@@ -11,13 +11,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ticket")
-public class Ticket {
+@Table(name = "diary_place_area")
+public class DiaryPlaceArea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
 
 

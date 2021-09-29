@@ -1,7 +1,7 @@
 package com.ticket.entities.diarypack;
 
 
-import com.ticket.entities.special.Organization;
+import com.ticket.entities.organization.Organization;
 import com.ticket.entities.templates.DiaryTemplate;
 import lombok.*;
 
@@ -21,12 +21,6 @@ public class Diary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Organization organization;
-
-    @ManyToOne
-    private DiaryTemplate diaryTemplate;
-
 
 
     @Temporal(TemporalType.DATE)
@@ -41,6 +35,8 @@ public class Diary {
     @Temporal(TemporalType.TIME)
     private Date endTime;
 
+    @JoinColumn(name = "isActive", nullable = false)
+    private Boolean isActive;
 
 
 

@@ -1,8 +1,7 @@
 package com.ticket.entities.account;
 
 
-import com.ticket.entities.account.Account;
-import com.ticket.entities.special.Organization;
+import com.ticket.entities.organization.Organization;
 import lombok.*;
 
 import javax.persistence.*;
