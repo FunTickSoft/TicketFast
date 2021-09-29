@@ -1,5 +1,7 @@
 package com.ticket.entities.templates;
 
+import com.ticket.entities.diarypack.reference.DiaryAreaPlaceReg;
+import com.ticket.entities.diarypack.reference.DiaryReg;
 import com.ticket.entities.templates.reference.TicketAoPlaceRefTemplate;
 import lombok.*;
 
@@ -37,5 +39,10 @@ public class AreaTemplates {
 
     @OneToMany(mappedBy = "areaTemplate")
     private Set<TicketAoPlaceRefTemplate> arenaTicketReference;
+
+    @OneToMany(mappedBy = "areaTemplate")
+    private Set<DiaryAreaPlaceReg> diaryAreaPlaceRegs ;
+
+
 
 }

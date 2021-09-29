@@ -1,6 +1,8 @@
 package com.ticket.entities.diarypack.reference;
 
 
+import com.ticket.entities.diarypack.Diary;
+import com.ticket.entities.templates.AreaTemplates;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +20,13 @@ public class DiaryAreaPlaceReg {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "area_id")
+    private AreaTemplates areaTemplates;
+
+    @ManyToOne
+    @JoinColumn(name = "diary_id")
+    private Diary diary;
 
 
     @Builder.Default

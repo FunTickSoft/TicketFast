@@ -1,6 +1,7 @@
 package com.ticket.entities.templates;
 
 
+import com.ticket.entities.diarypack.reference.DiaryReg;
 import com.ticket.entities.templates.reference.DiaryPlaceRefTemplate;
 import lombok.*;
 
@@ -32,6 +33,8 @@ public class DiaryTemplate {
     @OneToMany(mappedBy = "diaryTemplate")
     private Set<DiaryPlaceRefTemplate> refDiaryTemp;
 
+    @OneToMany(mappedBy = "diaryTemplate")
+    private Set<DiaryReg> diaryReg;
 
 
 }

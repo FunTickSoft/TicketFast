@@ -1,12 +1,17 @@
 package com.ticket.entities.diarypack;
 
 
+import com.ticket.entities.diarypack.reference.DiaryAreaPlaceReg;
+import com.ticket.entities.diarypack.reference.DiaryPlaceReg;
+import com.ticket.entities.diarypack.reference.DiaryReg;
+import com.ticket.entities.diarypack.reference.OrganizationDiaryReg;
 import com.ticket.entities.organization.Organization;
 import com.ticket.entities.templates.DiaryTemplate;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Builder(toBuilder = true)
 @Getter
@@ -21,7 +26,17 @@ public class Diary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToMany(mappedBy = "diary")
+    private Set<DiaryReg> diaryRegs;
 
+    @OneToMany(mappedBy = "diary")
+    private Set<OrganizationDiaryReg> organizationsDiaryReg;
+
+    @OneToMany(mappedBy = "diary")
+    private Set<DiaryPlaceReg> diaryPlaceRegs;
+
+    @OneToMany(mappedBy = "diary")
+    private Set<DiaryAreaPlaceReg> diaryAreaPlaceRegs;
 
     @Temporal(TemporalType.DATE)
     private Date starDate;
