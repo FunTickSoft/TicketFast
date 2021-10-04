@@ -1,4 +1,4 @@
-package com.ticket.restcontroller;
+package com.ticket.rest;
 
 
 import com.example.email.model.MessageModel;

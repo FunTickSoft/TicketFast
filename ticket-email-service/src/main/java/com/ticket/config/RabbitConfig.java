@@ -1,6 +1,5 @@
 package com.ticket.config;
 
-import com.ticket.seviceimpl.RabbitMQReceiver;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
