@@ -1,19 +1,22 @@
-package com.ticket.model;
+package com.example.email.model;
 
 
 import lombok.*;
 
+import java.io.Serializable;
+
+
 @Builder(toBuilder = true)
+@ToString
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Setter(value = AccessLevel.PUBLIC)
 @Getter
-public class MessageModel {
+public class MessageModel implements Serializable {
 
     private String recipientAddress;
     private String subject;
     private String text;
-
 
 
 }

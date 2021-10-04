@@ -1,4 +1,4 @@
-package com.ticket.controllers;
+package com.ticket.controller;
 
 import com.example.email.model.MessageModel;
 import com.ticket.service.MailSendingService;

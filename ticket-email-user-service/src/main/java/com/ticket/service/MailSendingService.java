@@ -5,9 +5,7 @@ import com.example.email.model.MessageModel;
 
 public interface MailSendingService {
 
-
     void send(MessageModel messageModel);
-
-    void testSend(String message);
+    void sendTest();
 
 }

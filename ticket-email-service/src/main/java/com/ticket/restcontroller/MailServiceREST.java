@@ -1,7 +1,7 @@
 package com.ticket.restcontroller;
 
 
-import com.ticket.model.MessageModel;
+import com.example.email.model.MessageModel;
 import com.ticket.service.MailSendingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
