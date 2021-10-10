@@ -1,7 +1,8 @@
 package com.ticket.seviceimpl;
 
 
-import com.example.email.model.MessageModel;
+import com.example.email.model.MessageMail;
+import com.ticket.config.EmailSMTPConfigurationProperties;
 import com.ticket.service.MailSendingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +18,21 @@ public class MailSendingImplementation implements MailSendingService {
 
 
     private JavaMailSender mailSender;
-    private Environment env;
+    private EmailSMTPConfigurationProperties properties;
 
     @Autowired
-    public MailSendingImplementation(JavaMailSender mailSender, Environment env) {
+    public MailSendingImplementation(JavaMailSender mailSender, EmailSMTPConfigurationProperties properties) {
         this.mailSender = mailSender;
-        this.env = env;
+        this.properties = properties;
     }
 
     @Override
-    public void send(MessageModel messageModel)
+    public void send(MessageMail messageModel)
     {
         log.info("MessageModel: {}", messageModel.toString());
 
         SimpleMailMessage email = new SimpleMailMessage();
-        email.setFrom(env.getProperty("spring.mail.fromAddress"));
+        email.setFrom(properties.getFromAddress());
 
         log.info("RecipientAddress: {}", messageModel.getRecipientAddress());
         if(messageModel.getRecipientAddress().equals("test")) {
@@ -55,8 +56,4 @@ public class MailSendingImplementation implements MailSendingService {
     }
 
 
-    @Override
-    public void testSend(String message) {
-
-    }
 }

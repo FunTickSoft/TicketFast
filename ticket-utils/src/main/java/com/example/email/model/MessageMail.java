@@ -12,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Setter(value = AccessLevel.PUBLIC)
 @Getter
-public class MessageModel implements Serializable {
+public class MessageMail implements Serializable {
 
     private String recipientAddress;
     private String subject;

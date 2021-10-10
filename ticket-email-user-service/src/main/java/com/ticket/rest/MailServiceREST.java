@@ -1,14 +1,17 @@
 package com.ticket.rest;
 
 
-import com.example.email.model.MessageModel;
-import com.ticket.service.MailSendingService;
+import com.example.email.model.MessageMail;
+import com.example.response.Response;
+import com.ticket.exceptions.BadRequestException;
+import com.ticket.service.MailServiceQuery;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Tag(name = "Student resource API", description = "API allows you to manipulate data Student resources")
@@ -16,18 +19,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/email")
 public class MailServiceREST {
 
-    private final MailSendingService service;
+    private final MailServiceQuery service;
 
     @Autowired
-    public MailServiceREST(MailSendingService service) {
+    public MailServiceREST(MailServiceQuery service) {
         this.service = service;
     }
 
 
-    @Operation(summary = "Send Email Message")
-    public void sendMsg(MessageModel model) {
-        log.info(model.toString());
+    @Operation(summary = "Send Msg Mail")
+    @PostMapping(path = "/send", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Response> sendMsg(@RequestBody MessageMail model) {
+        log.info("Get request /send with Request Body: {}", model);
+        Response response = service.send(model);
+        if(response.getCode() !=0) {
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
+    @ExceptionHandler
+    public ResponseEntity<Response> badRequestException(BadRequestException e) {
+        return new ResponseEntity<>(Response.builder().message(e.getMessage()).code(400).build(),HttpStatus.BAD_REQUEST);
     }
 
 

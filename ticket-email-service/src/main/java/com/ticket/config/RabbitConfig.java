@@ -7,7 +7,7 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,30 +15,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig {
 
-    @Value("${service.name:e-send-service}")
-    private String serviceName;
 
-    @Value("${exchange.name:service.exchange}")
-    private String exchangeName;
+    private final RabbitConfigurationProperties configuration;
 
-    @Bean
-    public Queue serviceQueue() {
-        return new Queue(serviceName + ".queue");
+    @Autowired
+    public RabbitConfig(RabbitConfigurationProperties configuration) {
+        this.configuration = configuration;
     }
-
-    @Bean
-    public DirectExchange exchange() {
-	    return new DirectExchange(exchangeName);
-    }
-
-    @Bean
-    public Binding userBinding(Queue serviceQueue, DirectExchange exchange) {
-        return BindingBuilder
-                .bind(serviceQueue)
-                .to(exchange)
-                .with(serviceName); // routing key
-    }
-
 
     @Bean
     public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {

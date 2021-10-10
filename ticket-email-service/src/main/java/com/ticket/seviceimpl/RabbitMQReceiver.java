@@ -1,8 +1,12 @@
 package com.ticket.seviceimpl;
 
-import com.example.email.model.MessageModel;
+
+
+import com.example.email.model.MessageMail;
+import com.ticket.config.RabbitConfigurationProperties;
 import com.ticket.service.MailSendingService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,11 +22,21 @@ public class RabbitMQReceiver {
     public RabbitMQReceiver(MailSendingService service) {
         this.service = service;
     }
-    @RabbitListener(queues = "#{'${service.name}' + '.queue'}")
-    public void receive(MessageModel message) {
-        log.info("Received: {}", message);
-        service.send(message);
+
+
+    @RabbitListener(queues = "#{rabbitConfigurationProperties.getNameQueue()}")
+    public void onMessage(Message message) {
+        log.info("Get Message from Queue {}, key {}", message ,message.getMessageProperties().getReceivedRoutingKey());
+
     }
+
+    @RabbitListener(queues = "#{rabbitConfigurationProperties.getNameQueue()}")
+    public void onMessage(MessageMail messageModel, Message message) {
+        log.info("Get Message from Queue {}, key {}", messageModel, message.getMessageProperties().getReceivedRoutingKey() );
+
+    }
+
+
 
 
 }
