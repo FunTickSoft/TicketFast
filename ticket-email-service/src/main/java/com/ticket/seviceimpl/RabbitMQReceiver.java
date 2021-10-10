@@ -24,16 +24,13 @@ public class RabbitMQReceiver {
     }
 
 
-    @RabbitListener(queues = "#{rabbitConfigurationProperties.getNameQueue()}")
-    public void onMessage(Message message) {
-        log.info("Get Message from Queue {}, key {}", message ,message.getMessageProperties().getReceivedRoutingKey());
 
-    }
 
     @RabbitListener(queues = "#{rabbitConfigurationProperties.getNameQueue()}")
     public void onMessage(MessageMail messageModel, Message message) {
         log.info("Get Message from Queue {}, key {}", messageModel, message.getMessageProperties().getReceivedRoutingKey() );
-
+        service.send(messageModel);
+        log.info("send email");
     }
 
 

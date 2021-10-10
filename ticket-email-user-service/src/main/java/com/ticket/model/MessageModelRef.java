@@ -16,10 +16,10 @@ import javax.validation.constraints.NotEmpty;
 public class MessageModelRef {
 
     @NotEmpty
+    @Email
     private String recipientAddress;
 
     @NotEmpty
-    @Email
     private String subject;
 
     @NotEmpty
