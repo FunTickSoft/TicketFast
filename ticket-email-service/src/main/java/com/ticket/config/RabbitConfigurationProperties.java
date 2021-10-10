@@ -39,7 +39,7 @@ public class RabbitConfigurationProperties {
 
     @Value("${service.rabbit.routingKey}")
     public void setNameRoutingKey(String nameRoutingKey) {
-        log.info("exchangeNameExchange: {}", nameRoutingKey);
+        log.info("nameRoutingKey: {}", nameRoutingKey);
         if((nameRoutingKey == "") || (nameRoutingKey == null)) {
             nameRoutingKey = "key";
         }
