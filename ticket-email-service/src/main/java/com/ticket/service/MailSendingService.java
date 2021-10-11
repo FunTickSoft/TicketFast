@@ -1,11 +1,12 @@
 package com.ticket.service;
 
 
-import com.ticket.model.MessageModel;
+import com.example.email.model.MessageMail;
+
 
 public interface MailSendingService {
 
-    void send(MessageModel messageModel);
-    void sendTest();
+    void send(MessageMail messageModel);
+
 
 }

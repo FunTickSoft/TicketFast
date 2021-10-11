@@ -1,5 +1,6 @@
 package com.ticket.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,44 +16,31 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("mail.properties")
 public class EmailConfiguration {
 
-    @Value("${spring.mail.host}")
-    private String mailServerHost;
 
-    @Value("${spring.mail.port}")
-    private Integer mailServerPort;
+    private final EmailSMTPConfigurationProperties smtpConfigurationProperties;
 
-    @Value("${spring.mail.username}")
-    private String mailServerUsername;
-
-    @Value("${spring.mail.password}")
-    private String mailServerPassword;
-
-    @Value("${spring.mail.properties.mail.smtp.auth}")
-    private Boolean mailServerAuth;
-
-    @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
-    private String mailServerStartTls;
+    @Autowired
+    public EmailConfiguration(EmailSMTPConfigurationProperties smtpConfigurationProperties) {
+        this.smtpConfigurationProperties = smtpConfigurationProperties;
+    }
 
     @Bean
-    @Scope("singleton")
     public JavaMailSender getJavaMailSender() {
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
-        mailSender.setHost(mailServerHost);
-        mailSender.setPort(mailServerPort);
-        mailSender.setUsername(mailServerUsername);
-        mailSender.setPassword(mailServerPassword);
+        mailSender.setHost(smtpConfigurationProperties.getMailServerHost());
+        mailSender.setPort(smtpConfigurationProperties.getMailServerPort());
+        mailSender.setUsername(smtpConfigurationProperties.getMailServerUsername());
+        mailSender.setPassword(smtpConfigurationProperties.getMailServerPassword());
 
         Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.smtp.auth", mailServerAuth);
-        props.put("mail.smtp.starttls.enable", mailServerStartTls);
+        props.put("mail.smtp.auth", smtpConfigurationProperties.getMailServerAuth());
+        props.put("mail.smtp.starttls.enable", smtpConfigurationProperties.getMailServerStartTls());
         props.put("mail.debug", "true");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-
         return mailSender;
     }
 
