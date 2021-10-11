@@ -29,11 +29,9 @@ public class DiaryReg {
     private DiaryTemplate diaryTemplate;
 
 
-
     @Builder.Default
     @Column(name ="isActive", nullable = false)
     private Boolean isActive = true;
-
 
 
 }

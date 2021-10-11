@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Registration Page</title>
+
+    <link type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"
+          rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <h1>Mail page</h1>
+    <form id="userForm" th:action="@{/mail/doSend}" th:object="${message}" action="#" method="post" class="form-horizontal">
+
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('recipientAddress')} ? 'has-error'">
+            <label class="control-label col-xs-2" for="email">Email</label>
+            <div class="col-xs-10">
+                <input id="email" type="email" title="email" th:field="*{recipientAddress}"/>
+                <span th:if="${#fields.hasErrors('recipientAddress')}" th:errors="*{recipientAddress}" class="help-block">Recipient Address Error</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('subject')} ? 'has-error'">
+            <label class="control-label col-xs-2" for="subject">Subject</label>
+            <div class="col-xs-10">
+                <input id="subject" type="text" title="subject" th:field="*{subject}"/>
+                <span th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="help-block">Subject Error</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('text')} ? 'has-error'">
+            <label class="control-label col-xs-2" for="text">Text</label>
+            <div class="col-xs-10">
+                <input id="text" type="text" title="text" th:field="*{text}"/>
+                <span th:if="${#fields.hasErrors('text')}" th:errors="*{text}" class="help-block">Text Error</span>
+            </div>
+        </div>
+
+        <div class="form-actions col-xs-offset-2 col-xs-10">
+            <input type="submit" class="btn btn-primary" value="Register"/>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
