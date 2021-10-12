@@ -1,10 +1,10 @@
 package com.ticket.entities.account;
 
-import com.ticket.entities.processing.Order;
+
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
+
 
 @Builder(toBuilder = true)
 @Getter
@@ -20,18 +20,33 @@ public class Account {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "login", nullable = false, length = 64)
+    private String login;
+
     @Column(name = "login_email", nullable = false, length = 64)
     private String loginEmail;
 
     @Column(name = "password", nullable = false, length = 1024)
     private String password;
 
-
     @Column(name = "status", nullable =false)
     private Byte status;
 
-    @Column(name = "isActive")
-    private Boolean isActive;
+    @Builder.Default
+    @Column(name = "enabled",  nullable = false)
+    private Boolean enabled = true;
+
+    @Builder.Default
+    @Column(name = "accountNonExpired")
+    private Boolean accountNonExpired = true;
+
+    @Builder.Default
+    @Column(name = "accountNonLocked")
+    private Boolean accountNonLocked = true;
+
+    @Builder.Default
+    @Column(name = "credentialsNonExpired")
+    private Boolean credentialsNonExpired = true;
 
     @OneToOne(mappedBy = "account")
     @PrimaryKeyJoinColumn
