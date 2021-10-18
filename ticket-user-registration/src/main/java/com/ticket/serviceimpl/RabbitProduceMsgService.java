@@ -1,11 +1,12 @@
 package com.ticket.serviceimpl;
 
-import com.example.email.model.MessageMail;
+import com.ticket.email.model.MessageMail;
 import com.ticket.config.ServiceConfiguration;
 import com.ticket.service.IRabbitProduceMsgService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class RabbitProduceMsgService implements IRabbitProduceMsgService {

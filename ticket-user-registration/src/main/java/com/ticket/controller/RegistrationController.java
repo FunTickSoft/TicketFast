@@ -35,7 +35,7 @@ public class RegistrationController {
         this.service = service;
     }
 
-    @RequestMapping(value = "signup")
+    @RequestMapping(value = "/signup")
     public ModelAndView registrationForm() {
         return new ModelAndView("registrationPage", "account", new AccountRepr());
     }
@@ -48,9 +48,7 @@ public class RegistrationController {
             return new ModelAndView("registrationPage", "account", account);
         }
         try {
-
             service.registerAccount(account, request);
-
         } catch (EmailExistsException e) {
             result.addError(new FieldError("account", "email", e.getMessage()));
             return new ModelAndView("registrationPage", "account", account);

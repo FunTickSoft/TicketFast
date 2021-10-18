@@ -1,8 +1,10 @@
 package com.ticket.listener;
 
 
+import com.ticket.email.model.MessageMail;
 import com.ticket.entities.account.Account;
 import com.ticket.events.OnRegistrationCompleteEvent;
+import com.ticket.service.IRabbitProduceMsgService;
 import com.ticket.service.ITokenVerifyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,13 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
 
     private final ITokenVerifyService service;
+    private final IRabbitProduceMsgService msgService;
 
     @Autowired
-    public RegistrationListener(ITokenVerifyService service) {
+    public RegistrationListener(ITokenVerifyService service, IRabbitProduceMsgService msgService) {
         this.service = service;
+        this.msgService = msgService;
     }
-
 
     @Override
     public void onApplicationEvent(final OnRegistrationCompleteEvent event) {
@@ -38,9 +41,25 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
         service.createVerificationTokenForUser(account, token);
 
+        msgService.send(
+                MessageMail.builder()
+                        .recipientAddress(account.getEmail())
+                        .subject("Reset Password")
+                        .text(message(event.getAppUrl(), token, account))
+                        .build()
+        );
+
     }
 
-
+    private String message(String uRL, String token, Account account) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(uRL)
+                .append("/account/changePassword?id=")
+                .append(account.getId())
+                .append("&token=")
+                .append(token);
+        return builder.toString();
+    }
 
 
 }

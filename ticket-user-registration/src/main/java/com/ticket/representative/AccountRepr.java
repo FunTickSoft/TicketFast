@@ -20,16 +20,16 @@ public class AccountRepr {
     @NotEmpty
     private String login;
 
-    @NotEmpty
     @Email
-    private String loginEmail;
+    @NotEmpty(message = "Email is required.")
+    private String email;
 
     private String phoneNumber;
 
-    @NotEmpty
+    @NotEmpty(message = "Password is required.")
     private String password;
 
-    @NotEmpty
+    @NotEmpty(message = "Password confirmation is required.")
     private String confirmPassword;
 
     private AccountStatus status;
@@ -41,10 +41,5 @@ public class AccountRepr {
     private Boolean accountNonLocked;
 
     private Boolean credentialsNonExpired;
-
-
-
-
-
 
 }

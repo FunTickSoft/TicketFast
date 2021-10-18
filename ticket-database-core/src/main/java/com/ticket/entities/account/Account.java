@@ -27,8 +27,8 @@ public class Account {
     @Column(name = "login", nullable = false, length = 64)
     private String login;
 
-    @Column(name = "login_email", nullable = false, length = 64)
-    private String loginEmail;
+    @Column(name = "email", nullable = false, length = 64)
+    private String email;
 
     @Column(name = "phone_number", length = 15)
     private String phoneNumber;
@@ -72,7 +72,7 @@ public class Account {
         return "Account{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
-                ", loginEmail='" + loginEmail + '\'' +
+                ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +

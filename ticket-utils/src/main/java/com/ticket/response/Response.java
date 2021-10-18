@@ -1,4 +1,4 @@
-package com.example.response;
+package com.ticket.response;
 
 
 import lombok.AccessLevel;

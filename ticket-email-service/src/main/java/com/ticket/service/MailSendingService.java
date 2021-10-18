@@ -1,7 +1,7 @@
 package com.ticket.service;
 
 
-import com.example.email.model.MessageMail;
+import com.ticket.email.model.MessageMail;
 
 
 public interface MailSendingService {

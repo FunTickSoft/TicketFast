@@ -32,9 +32,9 @@ public class AccountServiceImpl implements IAccountService {
     public Account registerNewUser(Account account) throws EmailExistsException {
 
         log.info("RegisterNewUser: {}", account);
-        if (emailExist(account.getLoginEmail())) {
+        if (emailExist(account.getEmail())) {
             log.info("Email already exists");
-            throw new EmailExistsException("Account with {} already exists " + account.getLoginEmail());
+            throw new EmailExistsException("Account with {} already exists " + account.getEmail());
         }
 
         log.info("User status false");
@@ -55,10 +55,10 @@ public class AccountServiceImpl implements IAccountService {
     public Account updateExistingUser(Account account) throws EmailExistsException {
         log.info("UpdateExists User: {}", account.toString());
         final Long id = account.getId();
-        final String email = account.getLoginEmail();
+        final String email = account.getEmail();
         final Account emailOwner = repository.findByLoginEmail(email).get();
         if (emailOwner != null && !id.equals(emailOwner.getId())) {
-            log.info("Email {} not available", account.getLoginEmail());
+            log.info("Email {} not available", account.getEmail());
             throw new EmailExistsException("Email not available.");
         }
         log.info("Save Update");

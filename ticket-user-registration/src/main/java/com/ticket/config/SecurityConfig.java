@@ -46,8 +46,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/user/changePassword*",
                         "/user/savePassword*",
                         "/badUser",
-                        "/registrationConfirm*").permitAll()
+                        "/registrationConfirm*",
+                        "/webjars/**",
+                        "/css/**",
+                        "/js/**",
+                        "/img/**").permitAll()
                 .antMatchers("/delete/**").hasRole("ADMIN")
+
                 .anyRequest().authenticated()
 
                 .and()

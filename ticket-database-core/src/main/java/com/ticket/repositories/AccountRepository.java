@@ -12,13 +12,13 @@ import java.util.Optional;
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
 
-    @Query("select a from Account a where a.loginEmail = (:loginEmail) and a.enabled = true")
+    @Query("select a from Account a where a.email = (:loginEmail) and a.enabled = true")
     Optional<Account> findByLoginEmail(@Param("loginEmail") String loginEmail);
 
     @Query("select a from Account a where a.login = (:login) and a.enabled = true")
     Optional<Account> findByLogin(String login);
 
-    @Query("select a from Account a where a.loginEmail = (:loginOrEmail) or a.login = (:loginOrEmail)")
+    @Query("select a from Account a where a.email = (:loginOrEmail) or a.login = (:loginOrEmail)")
     Optional<Account> findByLoginOrLoginEmail(@Param("loginOrEmail") String loginOrEmail);
 
     void deleteAccountById(Long id);

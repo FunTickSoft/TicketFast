@@ -1,7 +1,7 @@
 package com.ticket.model;
 
 
-import com.example.email.model.MessageMail;
+import com.ticket.email.model.MessageMail;
 import lombok.*;
 
 import javax.validation.constraints.Email;

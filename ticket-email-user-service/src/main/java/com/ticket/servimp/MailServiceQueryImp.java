@@ -1,8 +1,8 @@
 package com.ticket.servimp;
 
 
-import com.example.email.model.MessageMail;
-import com.example.response.Response;
+import com.ticket.email.model.MessageMail;
+import com.ticket.response.Response;
 import com.ticket.config.ServiceConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.AmqpException;

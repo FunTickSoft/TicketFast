@@ -1,4 +1,4 @@
-package com.example.email.model;
+package com.ticket.email.model;
 
 
 import lombok.*;

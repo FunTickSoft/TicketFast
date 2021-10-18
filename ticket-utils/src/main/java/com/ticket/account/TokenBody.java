@@ -1,4 +1,4 @@
-package com.example.account;
+package com.ticket.account;
 
 
 import lombok.*;
