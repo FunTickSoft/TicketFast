@@ -2,20 +2,28 @@ package com.ticket.repositories;
 
 import com.ticket.entities.account.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
 
+
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    Optional<Account> findByLoginEmail(String loginEmail);
 
+    @Query("select a from Account a where a.loginEmail = (:loginEmail) and a.enabled = true")
+    Optional<Account> findByLoginEmail(@Param("loginEmail") String loginEmail);
+
+    @Query("select a from Account a where a.login = (:login) and a.enabled = true")
     Optional<Account> findByLogin(String login);
 
-    Optional<Account> findByLoginOrLoginEmail(String loginOrEmail);
+    @Query("select a from Account a where a.loginEmail = (:loginOrEmail) or a.login = (:loginOrEmail)")
+    Optional<Account> findByLoginOrLoginEmail(@Param("loginOrEmail") String loginOrEmail);
 
     void deleteAccountById(Long id);
 
+    @Query("select a from Account a where a.enabled = true")
     List<Account> findAll();
 
 

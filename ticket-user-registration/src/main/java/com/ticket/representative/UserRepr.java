@@ -1,10 +1,11 @@
 package com.ticket.representative;
 
-import com.springsec.springsecurityexample.model.User;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Calendar;
+
+
 
 public class UserRepr {
 
@@ -33,13 +34,6 @@ public class UserRepr {
         this.enabled = enabled;
     }
 
-    public UserRepr(User user) {
-        this.email = user.getEmail();
-        this.password = user.getPassword();
-        this.passwordConfirmation = null;
-        this.created = user.getCreated();
-        this.enabled = user.getEnabled();
-    }
 
     public UserRepr() {
     }

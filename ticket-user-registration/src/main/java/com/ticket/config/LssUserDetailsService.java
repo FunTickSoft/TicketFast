@@ -2,6 +2,7 @@ package com.ticket.config;
 
 
 import com.ticket.entities.account.Account;
+import com.ticket.exceptions.AccountNotFoundException;
 import com.ticket.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,12 +15,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LssUserDetailsService implements UserDetailsService {
 
-    private static final String ROLE_USER = "ROLE_USER";
+//    private static final String ROLE_USER = "ROLE_USER";
 
     private final AccountRepository accountRepository;
 
@@ -28,23 +29,25 @@ public class LssUserDetailsService implements UserDetailsService {
         this.accountRepository = accountRepository;
     }
 
-    private Collection<? extends GrantedAuthority> getAuthorities(String role) {
-        return Arrays.asList(new SimpleGrantedAuthority(role));
-    }
+//    private Collection<? extends GrantedAuthority> getAuthorities(String role) {
+//        return Arrays.asList(new SimpleGrantedAuthority(role));
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String loginOrEmail) throws UsernameNotFoundException {
-        final Optional<Account> account = accountRepository.findByLoginOrLoginEmail(loginOrEmail);
-        if (account.get() == null) {
-            throw new UsernameNotFoundException("Account not found with login/email: " + loginOrEmail);
-        }
-        return new User(
-                account.get().getLogin(),
-                account.get().getPassword(),
-                account.get().getEnabled() ,
-                true,
-                true,
-                true, getAuthorities(ROLE_USER));
+        return accountRepository.findByLoginOrLoginEmail(loginOrEmail)
+                .map(account -> new User(
+                        account.getLogin(),
+                account.getPassword(),
+                account.getEnabled() ,
+                account.getAccountNonExpired(),
+                account.getAccountNonExpired(),
+                account.getAccountNonLocked(),
+                account.getAccountRoleRef().
+                        stream().
+                        map(reg ->new SimpleGrantedAuthority(reg.getRole().getName()))
+                        .collect(Collectors.toList())
+                )).orElseThrow(() -> new AccountNotFoundException("Account not found"));
     }
 
 

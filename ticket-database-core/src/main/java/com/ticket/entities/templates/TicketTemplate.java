@@ -3,6 +3,7 @@ package com.ticket.entities.templates;
 
 import com.ticket.entities.organization.Organization;
 import com.ticket.entities.templates.reference.TicketAoPlaceRefTemplate;
+import com.ticket.entities.templates.reference.TicketPlaceRefTemplate;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,5 +37,9 @@ public class TicketTemplate {
 
     @OneToMany(mappedBy = "ticketTemplate")
     private Set<TicketAoPlaceRefTemplate> ticketArenaReference;
+
+
+    @OneToMany(mappedBy = "ticketTemplate")
+    private Set<TicketPlaceRefTemplate> ticketPlaceRefTemplates;
 
 }

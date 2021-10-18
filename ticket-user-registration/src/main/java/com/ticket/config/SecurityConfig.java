@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout().permitAll().logoutUrl("/doLogout")
                 .and()
                 .csrf().disable();
-        ;
+
     } // @formatter:on
 
     @Bean

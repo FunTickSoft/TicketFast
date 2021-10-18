@@ -1,9 +1,13 @@
 package com.ticket.entities.account;
 
 
+import com.ticket.entities.account.ref.AccountRoleRef;
+import com.ticket.enums.AccountStatus;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
+
 
 
 @Builder(toBuilder = true)
@@ -26,11 +30,15 @@ public class Account {
     @Column(name = "login_email", nullable = false, length = 64)
     private String loginEmail;
 
+    @Column(name = "phone_number", length = 15)
+    private String phoneNumber;
+
     @Column(name = "password", nullable = false, length = 1024)
     private String password;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "status", nullable =false)
-    private Byte status;
+    private AccountStatus status;
 
     @Builder.Default
     @Column(name = "enabled",  nullable = false)
@@ -55,6 +63,26 @@ public class Account {
     @OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private UserPurchasingInfo userPurchasingInfo;
+
+    @OneToMany(mappedBy = "account")
+    private List<AccountRoleRef> accountRoleRef;
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", loginEmail='" + loginEmail + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                ", enabled=" + enabled +
+                ", accountNonExpired=" + accountNonExpired +
+                ", accountNonLocked=" + accountNonLocked +
+                ", credentialsNonExpired=" + credentialsNonExpired +
+                '}';
+    }
+
 
 
 }

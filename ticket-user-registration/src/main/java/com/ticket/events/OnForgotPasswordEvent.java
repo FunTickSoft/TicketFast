@@ -1,41 +1,31 @@
 package com.ticket.events;
 
-import com.springsec.springsecurityexample.model.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.ticket.entities.account.Account;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEvent;
 
-public class OnForgotPasswordEvent extends ApplicationEvent implements EmailEvents {
+@Getter
+@Setter
+@Slf4j
+public class OnForgotPasswordEvent extends ApplicationEvent  {
 
-    private static final Logger logger = LoggerFactory.getLogger(OnForgotPasswordEvent.class);
 
-    private User user;
+    private Account account;
     private String appUrl;
 
-    public OnForgotPasswordEvent(final User user, final String appUrl) {
-        super(user);
-        this.user = user;
+    public OnForgotPasswordEvent(final Account account, final String appUrl) {
+        super(account);
+        this.account = account;
         this.appUrl = appUrl;
-        logger.info(user.toString(), appUrl);
+        log.info(account.toString(), appUrl);
     }
 
-    @Override
-    public User getUser() {
-        return user;
-    }
 
-    @Override
-    public String getURL() {
-        return appUrl;
-    }
 
-    @Override
-    public String toString() {
-        return "OnForgotPasswordEvent{" +
-                "user=" + user +
-                ", appUrl='" + appUrl + '\'' +
-                '}';
-    }
 }
 
 

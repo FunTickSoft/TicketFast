@@ -1,40 +1,31 @@
 package com.ticket.events;
 
-import com.springsec.springsecurityexample.model.User;
+import com.ticket.entities.account.Account;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEvent;
 
-public class OnRegistrationCompleteEvent extends ApplicationEvent implements EmailEvents {
+@Getter
+@Setter
+@Slf4j
+public class OnRegistrationCompleteEvent extends ApplicationEvent {
 
-    private static final Logger logger = LoggerFactory.getLogger(OnRegistrationCompleteEvent.class);
+
 
     private final String appUrl;
-    private final User user;
+    private final Account account;
 
 
-    public OnRegistrationCompleteEvent(final User user, final String appUrl) {
-        super(user);
-        this.user = user;
+    public OnRegistrationCompleteEvent(final Account account, final String appUrl) {
+        super(account);
+        this.account = account;
         this.appUrl = appUrl;
-        logger.info(user.toString(), appUrl);
+        log.info(account.toString(), appUrl);
     }
 
-    @Override
-    public User getUser() {
-        return user;
-    }
-
-    @Override
-    public String getURL() {
-        return appUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "OnRegistrationCompleteEvent{" +
-                "appUrl='" + appUrl + '\'' +
-                ", user=" + user +
-                '}';
-    }
 }
