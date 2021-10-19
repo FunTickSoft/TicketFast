@@ -1,9 +1,13 @@
 package com.ticket.entities.diarypack;
 
 
+import com.ticket.entities.diarypack.reference.DiaryAreaDiaryPlaceReg;
+import com.ticket.entities.templates.AreaTemplates;
+import com.ticket.entities.templates.PlaceTemplate;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Builder(toBuilder = true)
 @Getter
@@ -18,6 +22,23 @@ public class DiaryPlaceArea {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+
+    @OneToMany(mappedBy = "diaryPlaceArea")
+    private Set<DiaryAreaDiaryPlaceReg> diaryAreaPlaceRegs;
+
+    @OneToOne
+    @JoinColumn(name = "area_template_id", referencedColumnName = "id")
+    private AreaTemplates templateArea;
+
+    @Column(name = "max_count_place")
+    private Long maxCountAreaPlaces;
+
+    @Column(name = "sold_area_place")
+    private Long soldAreaPlace;
+
+    @Column(name = "isActive", nullable = false)
+    private Boolean isActive;
 
 
 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>Home</title>
+    <link type="text/css" href="//netdna.bootstrapcdn.com/twitter-bootstrap/latest/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+<table border="1">
+
+    <caption>Home Page</caption>
+    <tr>
+        <th>Login</th>
+        <th>Some</th>
+    </tr>
+    <tr>
+        <td>
+          <div>
+              <div sec:authorize="isAuthenticated()">
+                  <th:block th:replace="users/footer :: footer"/>
+              </div>
+              <div sec:authorize="!isAuthenticated()" >
+                  <th:block th:replace="users/footer :: login"/>
+              </div>
+          </div>
+        </td>
+        <td>
+            QUAD2
+        </td>
+    </tr>
+    <tr>
+        <td>QUAD3</td>
+        <td>QUAD4</td>
+    </tr>
+</table>
+
+</body>
+</html>

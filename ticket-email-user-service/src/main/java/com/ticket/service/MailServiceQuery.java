@@ -1,8 +1,8 @@
 package com.ticket.service;
 
 
-import com.example.email.model.MessageMail;
-import com.example.response.Response;
+import com.ticket.email.model.MessageMail;
+import com.ticket.response.Response;
 
 
 public interface MailServiceQuery {

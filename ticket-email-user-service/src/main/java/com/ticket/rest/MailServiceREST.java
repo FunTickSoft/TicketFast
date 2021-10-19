@@ -1,8 +1,8 @@
 package com.ticket.rest;
 
 
-import com.example.email.model.MessageMail;
-import com.example.response.Response;
+import com.ticket.email.model.MessageMail;
+import com.ticket.response.Response;
 import com.ticket.exceptions.BadRequestException;
 import com.ticket.service.MailServiceQuery;
 import io.swagger.v3.oas.annotations.Operation;
