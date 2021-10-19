@@ -1,0 +1,69 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head th:replace="fragments/header :: head"></head>
+
+<body>
+<div class="container">
+    <h1>Registration page</h1>
+    <form id="userForm" th:action="@{/reg}" th:object="${account}" action="#" method="post" class="form-horizontal">
+        <!--    <div th:if="${#fields.hasErrors('global')}" th:errors="*{global}" class="alert alert-danger">Incorrect password confirmation</div>-->
+        <input type="hidden" th:field="*{id}"/>
+
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('login')} ? 'has-error'">
+            <label class="control-label col-xs-2" for="email">Login</label>
+            <div class="col-xs-10">
+                <input id="login" type="text" title="login" th:field="*{login}"/>
+                <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="help-block">Login Error</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-error'">
+            <label class="control-label col-xs-2" for="email">Email</label>
+            <div class="col-xs-10">
+                <input id="email" type="email" title="email" th:field="*{email}"/>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="help-block">Email Error</span>
+            </div>
+        </div>
+
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('phoneNumber')} ? 'has-error'">
+            <label class="control-label col-xs-2" for="phoneNumber">Phone Number</label>
+            <div class="col-xs-10">
+                <input id="phoneNumber" type="text" title="############### where #-is Number. Min/Max chars 10/15" th:field="*{phoneNumber}" pattern="(\d){10,15}"/>
+                <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="help-block">Phone Number Error</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
+            <label class="control-label col-xs-2" for="password">Password</label>
+            <div class="col-xs-10">
+                <input id="password" type="password" title="password" th:field="*{password}"
+                       pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$"/>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                      class="help-block">Password Error</span>
+            </div>
+        </div>
+
+        <div class="form-group" th:classappend="${#fields.hasErrors('confirmPassword')} ? 'has-error'">
+            <label class="control-label col-xs-2" for="confirm_password">Password Confirmation</label>
+            <div class="col-xs-10">
+                <input id="confirm_password" type="password" title="confirmPassword" th:field="*{confirmPassword}"/>
+                <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="help-block">Password Confirmation Error</span>
+            </div>
+        </div>
+        <span id='message'></span>
+
+        <div class="form-actions col-xs-offset-2 col-xs-10">
+            <input id="button_activate" type="submit" class="btn btn-primary" value="Register"/>
+        </div>
+
+    </form>
+</div>
+
+
+<script th:replace="fragments/scripts.html :: scripts"></script>
+
+</body>
+</html>

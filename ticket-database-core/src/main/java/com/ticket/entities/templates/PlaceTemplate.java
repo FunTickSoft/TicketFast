@@ -4,11 +4,14 @@ package com.ticket.entities.templates;
 import com.ticket.entities.organization.Organization;
 import com.ticket.entities.special.RentInfo;
 import com.ticket.entities.templates.reference.DiaryPlaceRefTemplate;
+import com.ticket.entities.templates.reference.TicketAoPlaceRefTemplate;
+import com.ticket.entities.templates.reference.TicketPlaceRefTemplate;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 @Builder(toBuilder = true)
 @Getter
@@ -47,6 +50,12 @@ public class PlaceTemplate {
     @Column(name = "isRent", nullable = false)
     private Boolean isRent;
 
+    @Column(name = "count_place")
+    private Long countPlace;
+
+    @Column(name = "hasArea", nullable = false)
+    private Boolean hasArea;
+
     @Column(name = "deleteAfterRentExpire", nullable = false)
     private Boolean deleteAfterRentExpire;
 
@@ -65,5 +74,11 @@ public class PlaceTemplate {
 
     @OneToMany(mappedBy = "placeTemplate")
     private Set<DiaryPlaceRefTemplate> refDiaryTemp;
+
+    @OneToMany(mappedBy = "placeTemplate")
+    private Set<TicketPlaceRefTemplate> ticketPlaceRefTemplates;
+
+
+
 
 }

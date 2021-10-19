@@ -2,15 +2,10 @@ package com.ticket.seviceimpl;
 
 
 
-import com.example.email.model.MessageMail;
-import com.ticket.config.RabbitConfigurationProperties;
+import com.ticket.email.model.MessageMail;
 import com.ticket.service.MailSendingService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.core.Message;
-import org.springframework.amqp.rabbit.annotation.Exchange;
-import org.springframework.amqp.rabbit.annotation.Queue;
-import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
